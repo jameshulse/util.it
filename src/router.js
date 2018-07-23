@@ -1,12 +1,20 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import WorkBench from './views/WorkBench.vue';
+import WorkBench from './views/WorkBench';
+import ToolPad from './views/ToolPad';
 
 Vue.use(Router)
 
 export default new Router({
     routes: [
-        { path: '/y/:tool', name: 'workbench', component: WorkBench, props: true },
-        { path: '', name: 'home', component: WorkBench },
+        {
+            path: '',
+            name: 'workbench',
+            component: WorkBench,
+            children: [
+                { path: '/y/:slug', component: ToolPad, props: true },
+            ],
+            props: true
+        },
     ],
 });

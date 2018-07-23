@@ -2,7 +2,7 @@ export default {
     options: {
 
     },
-    input: {
+    inputs: {
         query: { label: 'Query', type: 'textarea' },
     },
     execute({ query }) {

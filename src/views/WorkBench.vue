@@ -1,35 +1,25 @@
 <template>
     <div class="workbench">
         <div class="sidebar">
-            <div v-for="tool in tools" :key="tool.slug" @click="selectedTool = tool">
-                {{ name }}
-            </div>
+            <router-link v-for="tool in tools" :key="tool.slug" :to="`/y/${tool.slug}`">
+                {{ tool.name }}
+            </router-link>
         </div>
         <div class="workspace">
-            <ToolPad
-                v-if="selectedTool"
-                :name="selectedTool.name"
-            />
+            <router-view />
         </div>
     </div>
 </template>
 
 <script>
-import ToolPad from '@/components/ToolPad';
 import { tools } from '@/tools/manifest';
 
 export default {
     name: 'WorkBench',
-    components: {
-        ToolPad,
-    },
     data() {
         return {
-            selectedTool: null,
+            tools,
         };
-    },
-    computed: {
-        tools,
     },
 };
 </script>
@@ -41,5 +31,11 @@ export default {
 
 .sidebar {
     flex-basis: 20%;
+    border-right: 1px solid #CCC;
+    height: 100%;
+}
+
+.workspace {
+    flex: 1;
 }
 </style>
